@@ -6,6 +6,7 @@
 
 ## 當前寫過的<span style=color:#00FF00>語言</span>有以下：
 
+
 * ## [Visual Basic](#visual-basic回頂部)
 * ## [C#](#c回頂部)
 * ## [C](#cc回頂部)
@@ -36,7 +37,7 @@
 
 ---
 
-<font size="+3" style=color:yellow>部分程式碼</font>
+# <font size="+3" style=color:yellow>部分程式碼</font>
 
 ## <span id=vb>Visual Basic</span>　[回頂部](#關於我)
 
