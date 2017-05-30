@@ -13,7 +13,7 @@
 * ## [C++](#cc回頂部)
 * ## [HTML](#html回頂部)
 * ## [CSS](#css回頂部)
-* ## [Sass](#Sass回頂部)
+* ## [Scss](#scss回頂部)
 * ## [JavaScript](#javascript回頂部)
 * ## [PHP](#php回頂部)
 
@@ -339,9 +339,9 @@ td#joinupdate:hover #reply {
 }
 
 ```
-## <span id=Sass>Sass</span>　[回頂部](#關於我)
+## <span id=Scss>Scss</span>　[回頂部](#關於我)
 
-```css
+```scss
 $pixel : 200px;          
 $percent: 70%;            
 $int: 128;
