@@ -13,6 +13,7 @@
 * ## [C++](#cc回頂部)
 * ## [HTML](#html回頂部)
 * ## [CSS](#css回頂部)
+* ## [Sass](#Sass回頂部)
 * ## [JavaScript](#javascript回頂部)
 * ## [PHP](#php回頂部)
 
@@ -337,6 +338,51 @@ td#joinupdate:hover #reply {
     filter: drop-shadow(5px 5px 5px #333);
 }
 
+```
+## <span id=Sass>Sass</span>　[回頂部](#關於我)
+
+```css
+$pixel : 200px;          
+$percent: 70%;            
+$int: 128;
+$float: 1.5em;
+$img :  "../images/hello.jpg";
+$noRepeat :  no-repeat;
+$hex : #808080;
+$rgba : rgba($int,$int,$int,.2);
+$list : 1px 1px 3px black,  3px 3px 5px $hex;
+$color :  blue;
+$mid: middle_child;
+@mixin mixin1 {
+     color: gray;
+     background: $color;
+     line-height: $float;
+}
+div {
+  width: $pixel;
+  line-height: $float;
+  background: url($img) $noRepeat $rgba;
+  box-shadow: $list;
+}
+body {
+      @include mixin1();
+}
+#parent {
+  background: green;
+  #child-One{
+        background: yellow;
+        font-size:1em;
+  }
+  #child-Two{
+        font-weight: 200;
+        #inner-child .content{
+              background:blue;
+        }
+  }
+  &.funny{
+    height: 100px;  
+  }
+}
 ```
 
 ## <span id=js>JavaScript</span>　[回頂部](#關於我)
