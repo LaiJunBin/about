@@ -16,9 +16,11 @@
 * ## [Scss](#scss回頂部)
 * ## [JavaScript](#javascript回頂部)
 * ## [PHP](#php回頂部)
+* ## [R](#R回頂部)
 
 ## 網頁部分使用 <span style=color:#33CCFF>Visual Studio Code</font>做開發，
 ## C++使用<span style=color:#33CCFF>Dev C++</span>，
+## R語言使用<span style=color:#33CCFF>RStudio</span>，
 ## 其餘則是使用 <span style=color:#33CCFF>Visual Studio</span>
 
 ## 使用過的<span style=color:#00FF00>函式庫</span>有以下：
@@ -34,7 +36,7 @@
 
 ## 此系統有build成APP ， Android用戶可以在Google Play 商店 搜尋 續食你我他
 
-## 自己也有架設伺服器，[點我進入網站](http://1.34.6.160)
+## 自己也有架設網站伺服器，[點我進入網站](http://1.34.6.160)
 
 ---
 
@@ -44,43 +46,79 @@
 
 ```vb
 Public Class Form1
+    Class Tree
+        Public data As Integer
+        Public child As New List(Of Tree)
+        Public subTree As New List(Of Integer)
+        Public parent As Tree
+        Sub New()
+            parent = Nothing
+        End Sub
+    End Class
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         FileOpen(1, "in1.txt", OpenMode.Input)
         FileOpen(2, "out.txt", OpenMode.Output)
-        Dim a() As String = LineInput(1).Split(","), b() As String = LineInput(1).Split(","), x, y, d As New List(Of Double), ans As String = ""
-        For i = 0 To b.Count - 1
-            x.Add(Val(a(i))) : y.Add(Val(b(i)))
+        Dim m As Integer = LineInput(1)
+        For w = 1 To m
+            Dim data As List(Of String) = LineInput(1).Split.ToList
+            Dim node As New List(Of Integer)
+            For Each item In data
+                Dim edge() As Integer = item.Split(",").Select(Function(X) CInt(X)).ToArray
+                node.AddRange(edge.ToList)
+            Next
+            Dim root As Integer = node.Find(Function(x) node.FindAll(Function(y) y = x).Count = 1)
+            Dim alreadyNode As New List(Of Integer) From {root}
+            Dim Tree As New Tree With {.data = root}
+            Dim centerNode As New List(Of Integer)
+            Do Until data.Count = 0
+                Dim index As Integer = 0
+                Dim parent, child As Integer
+                For i = 0 To data.Count - 1
+                    Dim edge() As Integer = data(i).Split(",").Select(Function(x) CInt(x)).ToArray
+                    If alreadyNode.Contains(edge.First) Or alreadyNode.Contains(edge.Last) Then
+                        parent = Array.Find(edge, Function(x) alreadyNode.Contains(x))
+                        child = Array.Find(edge, Function(x) alreadyNode.Contains(x) = False)
+                        alreadyNode.AddRange(edge.ToList)
+                        index = i : Exit For
+                    End If
+                Next
+                createTree(Tree, child, parent)
+                data.RemoveAt(index)
+            Loop
+            For Each current In alreadyNode.Distinct
+                Dim startNode As Tree = findNode(Tree, current)
+                Dim depth As Integer = depthSearch(startNode)
+                Dim topHt As Integer = topSearch(startNode)
+                If topHt = depth Then centerNode.Add(current)
+            Next
+            PrintLine(2, If(centerNode.Count > 0, Strings.Join(centerNode.Select(Function(X) X.ToString).ToArray, ","), "0"))
         Next
-        Call tree(x, y, ans, d)
-        PrintLine(2, Strings.Left(ans, Len(ans) - 1))
         FileClose()
         Close()
     End Sub
-    Sub tree(ByVal a As List(Of Double), ByVal b As List(Of Double), ByRef ans As String, ByVal d As List(Of Double))
-        For i = 0 To b.Count - 1
-            If a.IndexOf(b(i)) <> -1 Then
-                Dim x, y As New List(Of Double)
-                For j = 0 To a.IndexOf(b(i)) - 1
-                    x.Add(a(j))
-                Next
-                For j = a.IndexOf(b(i)) + 1 To a.Count - 1
-                    y.Add(a(j))
-                Next
-                If x.Count <> 1 Then
-                    tree(x, b, ans, d)
-                ElseIf d.Contains(x(0)) = False Then
-                    ans &= x(0) & ","
-                    d.Add(x(0))
-                End If
-                If y.Count <> 1 Then
-                    tree(y, b, ans, d)
-                ElseIf d.Contains(y(0)) = False Then
-                    ans &= y(0) & ","
-                    d.Add(y(0))
-                End If
-            End If
-        Next
+    Sub createTree(ByVal Tree As Tree, ByVal data As Integer, ByVal parent As Integer)
+        Dim node As New Tree With {.data = data, .parent = Tree}
+        If Tree.data = parent Then Tree.child.Add(node) : Tree.subTree.Add(data) : Return
+        Dim index As Integer = Tree.child.FindIndex(Function(X) X.data = parent OrElse X.subTree.Contains(parent))
+        createTree(Tree.child(index), data, parent)
+        Tree.subTree.Add(data)
     End Sub
+    Function depthSearch(ByVal Tree As Tree, Optional ByVal ht As Integer = 0, Optional ByRef maxHt As Integer = 0)
+        If Tree.child.Count = 0 Then maxHt = Math.Max(maxHt, ht) : Return maxHt
+        For Each node In Tree.child
+            depthSearch(node, ht + 1, maxHt)
+        Next
+        Return maxHt
+    End Function
+    Function topSearch(ByVal Tree As Tree, Optional ByVal ht As Integer = 0, Optional ByRef maxHt As Integer = 0)
+        If Tree.parent Is Nothing Then maxHt = Math.Max(ht, maxHt) : Return maxHt
+        Return topSearch(Tree.parent, ht + 1, maxHt)
+    End Function
+    Function findNode(ByVal Tree As Tree, ByVal target As Integer)
+        If Tree.data = target Then Return Tree
+        Dim index As Integer = Tree.child.FindIndex(Function(X) X.data = target Or X.subTree.Contains(target))
+        Return findNode(Tree.child(index), target)
+    End Function
 End Class
 ```
 
@@ -472,6 +510,32 @@ function checkForm(){
         echo "</center>";
         }
     ?>
+```
+## <span id=R>R</span>　[回頂部](#關於我)
+
+```R
+library(igraph)
+g <- make_empty_graph(directed=TRUE)
+g <- add_vertices(g,10, color='#3399ff')
+g <- add_edges(g,c(
+  2,6,
+  9,5,
+  5,8,
+  5,7,
+  7,3,
+  2,10,
+  10,4,
+  3,1,
+  1,8,
+  4,6
+))
+V(g)$label <- LETTERS[1:10]
+E(g)$weight <- c(8,9,4,6,5,1,10,5,7,6)
+plot(g, 
+     edge.label=E(g)$weight ,
+     layout=layout_in_circle(g),
+     edge.arrow.size = 0.2
+)
 ```
 
 ## <span id=jq>jQuery</span>　[回頂部](#關於我)
