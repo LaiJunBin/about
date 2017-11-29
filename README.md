@@ -16,7 +16,7 @@
 * ## [Scss](#scss回頂部)
 * ## [JavaScript](#javascript回頂部)
 * ## [PHP](#php回頂部)
-* ## [R](#R回頂部)
+* ## [R](#r回頂部)
 
 ## 網頁部分使用 <span style=color:#33CCFF>Visual Studio Code</font>做開發，
 ## C++使用<span style=color:#33CCFF>Dev C++</span>，
