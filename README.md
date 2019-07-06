@@ -11,7 +11,7 @@
 * [Python](https://github.com/xyz607xx/python) => 包含解題、應用程式、爬蟲、基本繪圖
 * [VB_Subject](https://github.com/xyz607xx/VB_Subject) => 包含資料結構、設計模式(DesignPattern)、解題(Tree and Graph)、應用程式及Tree類別庫(BST、VebTree)
 * [WebPage_Subject](https://github.com/xyz607xx/WebPage_Subject) => HTML5、CSS3、JS(jQuery)、PHP 基礎網頁的教學或範例(如LocalStorage、PDO、Ajax、萬年曆等等...)
-* [laiPHP](https://github.com/xyz607xx/laiPHP) => 自己寫的MVC框架。
+* [laiPHP](https://github.com/laijunbin/laiPHP) => 自己寫的MVC框架。
 * [TypeScript](https://github.com/xyz607xx/TypeScript) => ts的練習，目前包含了一些Trees資料結構的模組，
 * [WebExercise](https://github.com/xyz607xx/WebExercise) => 全國技能競賽(網頁設計) 的練習檔案，包含了一些JS事件處理、遊戲、基礎小畫家、拖放API、RestfulAPI以及繪製圖表...
 * [dataStructImage](https://github.com/xyz607xx/dataStructImage) => 包含了一些以R(語言)繪製的資料結構圖形
